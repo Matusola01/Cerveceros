@@ -1,4 +1,6 @@
 import Navbar from '../components/navbar';
+import connectDB from '../../lib/mongodb';
+import User from '../../Models/User';
 
 export default function Profile({ users }) {
 	console.log(users);
@@ -21,56 +23,52 @@ export default function Profile({ users }) {
 											/>
 										</div>
 									</div>
-									<div className="w-full px-4 text-center mt-20">
-										<div className="flex justify-center py-4 lg:pt-4 pt-8">
-											<div className="mr-4 p-3 text-center">
-												<span className="text-xl font-bold block uppercase tracking-wide text-black">
-													22
-												</span>
-												<span className="text-sm text-black">Friends</span>
-											</div>
-											<div className="mr-4 p-3 text-center">
-												<span className="text-xl font-bold block uppercase tracking-wide text-black">
-													10
-												</span>
-												<span className="text-sm text-black">Photos</span>
-											</div>
-											<div className="lg:mr-4 p-3 text-center">
-												<span className="text-xl font-bold block uppercase tracking-wide text-black">
-													89
-												</span>
-												<span className="text-sm text-black">Comments</span>
-											</div>
-										</div>
-									</div>
 								</div>
 								<div className="text-center mt-12">
 									<h3 className="text-xl font-semibold leading-normal mb-2 text-black mb-2">
-										Jenna Stones
+										{users.map(user => (
+											<div>
+												<h1>{user.name}</h1>
+											</div>
+										))}
 									</h3>
 									<div className="text-sm leading-normal mt-0 mb-2 text-black font-bold uppercase">
 										<i className="fas fa-map-marker-alt mr-2 text-lg text-black"></i>
-										Los Angeles, California
+										{users.map(user => (
+											<div>
+												<h1>{user.dni}</h1>
+											</div>
+										))}
 									</div>
-									<div className="mb-2 text-blueGray-600 mt-10">
-										<i className="fas fa-briefcase mr-2 text-lg text-black"></i>
-										Solution Manager - Creative Tim Officer
+									<div className="text-sm leading-normal mt-0 mb-2 text-black font-bold uppercase">
+										<i className="fas fa-map-marker-alt mr-2 text-lg text-black"></i>
+										{users.map(user => (
+											<div>
+												<h1>{user.relationship}</h1>
+											</div>
+										))}
 									</div>
-									<div className="mb-2 text-blueGray-600">
-										<i className="fas fa-university mr-2 text-lg text-black"></i>
-										University of Computer Science
+									<div className="text-sm leading-normal mt-0 mb-2 text-black font-bold uppercase">
+										<i className="fas fa-map-marker-alt mr-2 text-lg text-black"></i>
+										{users.map(user => (
+											<div>
+												<h1>{user.gender}</h1>
+											</div>
+										))}
 									</div>
 								</div>
 								<div className="mt-10 py-10 border-t border-blueGray-200 text-center">
 									<div className="flex flex-wrap justify-center">
-										<div className="w-full lg:w-9/12 px-4">
-											<p className="mb-4 text-lg leading-relaxed text-black">
-												An artist of considerable range, Jenna the name taken by
-												Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and
-												records all of his own music, giving it a warm, intimate feel with a
-												solid groove structure. An artist of considerable range.
-											</p>
-										</div>
+										<a href="http://localhost:3000/" class="flex items-center">
+											<img
+												src="https://mir-s3-cdn-cf.behance.net/projects/404/20681065.54468ea62dc38.jpg"
+												class="mr-3 h-6 sm:h-10"
+												alt="Cerveza Salta Logo"
+											/>
+											<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-black">
+												Sindicato de Cerveceros de Salta
+											</span>
+										</a>
 									</div>
 								</div>
 							</div>
@@ -108,4 +106,20 @@ export default function Profile({ users }) {
 			</div>
 		</div>
 	);
+}
+
+export async function getServerSideProps() {
+	try {
+		await connectDB();
+
+		const res = await User.find({});
+		const users = res.map(e => {
+			const user = e.toObject();
+			user._id = user._id.toString();
+			return user;
+		});
+		return { props: { users: users } };
+	} catch (error) {
+		console.log(error);
+	}
 }

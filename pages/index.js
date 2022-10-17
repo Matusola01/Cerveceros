@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Credential from '../Images/Credencial.jpeg';
 
 export default function Home({ users }) {
-	console.log(users);
+	// console.log(users);
 	return (
 		<>
 			<Navbar />
@@ -18,7 +18,6 @@ export default function Home({ users }) {
 						<h2>DNI: {user.dni}</h2>
 						<h2>Parentesco: {user.relationship}</h2>
 						<h2>Género: {user.gender}</h2>
-						<h1 className="text-xl font-bold underline">Hello world!</h1>
 					</div>
 				))}
 			</div>
