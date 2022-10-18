@@ -3,7 +3,6 @@ import connectDB from '../../lib/mongodb';
 import User from '../../Models/User';
 
 export default function Profile({ users }) {
-	console.log(users);
 	return (
 		<div>
 			<Navbar />

@@ -3,24 +3,24 @@ import connectDB from '../lib/mongodb';
 import User from '../Models/User';
 import Navbar from './components/navbar';
 import Image from 'next/image';
-import Credential from '../Images/Credencial.jpeg';
+// import Credential from '../Images/Credencial.jpeg';
+import Credential from './components/credential';
 
 export default function Home({ users }) {
 	// console.log(users);
 	return (
 		<>
-			<Navbar />
-			<div className="container flex flex-wrap justify-between items-center mx-auto">
-				<Image src={Credential} />
-				{users.map(user => (
-					<div>
-						<h1>Nombre y apellido: {user.name}</h1>
-						<h2>DNI: {user.dni}</h2>
-						<h2>Parentesco: {user.relationship}</h2>
-						<h2>Género: {user.gender}</h2>
-					</div>
-				))}
+			<div>
+				<Navbar />
 			</div>
+			<div className="bg-cover bg-no-repeat w-screen h-screen position:absolute">
+				<Credential user={users} />
+			</div>
+
+			{/* <div className="container flex flex-wrap justify-between items-center mx-full my-full"> */}
+
+			{/* <Image src={Credential} /> */}
+			{/* </div> */}
 		</>
 	);
 }
