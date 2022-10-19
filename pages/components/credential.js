@@ -2,7 +2,6 @@ import connectDB from '../../lib/mongodb';
 import User from '../../Models/User';
 
 export default function Credential(user) {
-	console.log(user.name);
 	return (
 		<div className=" bg-[url(../Images/Credencial.jpeg)] bg-no-repeat bg-cover bg-center w-auto h-screen">
 			{/* {user.map(userDb => ( */}
