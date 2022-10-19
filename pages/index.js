@@ -2,12 +2,9 @@ import Head from 'next/head';
 import connectDB from '../lib/mongodb';
 import User from '../Models/User';
 import Navbar from './components/navbar';
-import Image from 'next/image';
-// import Credential from '../Images/Credencial.jpeg';
 import Credential from './components/credential';
 
 export default function Home({ users }) {
-	// console.log(users);
 	return (
 		<>
 			<div>
@@ -16,11 +13,6 @@ export default function Home({ users }) {
 			<div className="bg-cover bg-no-repeat w-screen h-screen position:absolute">
 				<Credential user={users} />
 			</div>
-
-			{/* <div className="container flex flex-wrap justify-between items-center mx-full my-full"> */}
-
-			{/* <Image src={Credential} /> */}
-			{/* </div> */}
 		</>
 	);
 }

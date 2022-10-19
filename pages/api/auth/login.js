@@ -13,7 +13,6 @@ export default async function loginHandler(req, res) {
 		user._id = user._id.toString();
 		return user;
 	});
-	// console.log(users);
 	const userDni = users.map(e => e.dni);
 	const userAuth = userDni.shift();
 	if (userAuth === dni) {

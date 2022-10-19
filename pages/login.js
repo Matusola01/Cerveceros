@@ -11,8 +11,6 @@ function Login() {
 	const handleSubmit = async e => {
 		e.preventDefault();
 		const res = await axios.post('/api/auth/login', credentials);
-		// console.log(res);
-		// console.log(credentials);
 
 		if (res.status === 200) {
 			router.push('/');
